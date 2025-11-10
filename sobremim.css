@@ -1,0 +1,232 @@
+/* Variáveis para cores (Consistência com a página principal) */
+:root {
+    --dark-grey: #1a1a1a; /* Fundo principal */
+    --mid-grey: #2c2c2c; /* Elementos secundários/navegação */
+    --light-grey: #f0f0f0; /* Texto claro */
+    --purple-primary: #7f00ff; /* Roxo vibrante - Cor de destaque */
+    --purple-secondary: #5e00c7; /* Roxo para hover/detalhes */
+}
+
+/* Reset Básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--dark-grey);
+    color: var(--light-grey);
+    line-height: 1.7; /* Aumentado para melhor leitura do texto */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Para fixar o rodapé na parte inferior */
+}
+
+/* --- Cabeçalho e Navegação (Estilo mantido) --- */
+header {
+    background-color: var(--mid-grey);
+    padding: 20px 5%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--light-grey);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Efeito de destaque ao passar o mouse (underline roxo) */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--purple-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--purple-primary);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- SEÇÃO PRINCIPAL - MODIFICAÇÕES PARA COLUNAS --- */
+
+/* Novo contêiner para alinhar main e imagem lado a lado e centralizar */
+/* Como não posso adicionar um wrapper no HTML, vou agrupar o main e o div.imagem */
+/* em um contêiner virtual usando flexbox no body, e isolar essa seção */
+
+.column-layout {
+    display: flex; /* Ativa o flexbox para colunas */
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 60px auto; /* Centraliza o contêiner e aplica margem */
+    padding: 0 5%;
+    gap: 40px; /* Espaçamento entre as colunas */
+    flex-grow: 1;
+}
+
+/* MODIFICADO: Adiciona uma nova classe ao main para que ele possa ser agrupado */
+/* O main e o .imagem precisam ser envolvidos em uma nova div no HTML
+   para que esta classe funcione corretamente, como no Exemplo A */
+/* Ou, modificamos o body/main diretamente como abaixo: */
+
+/* Vamos ajustar o body para acomodar esta nova estrutura de layout */
+body {
+    background-color: var(--dark-grey);
+    color: var(--light-grey);
+    line-height: 1.7; 
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; 
+    /* Adicionando Flexbox para o agrupamento main/.imagem */
+}
+
+/* Ajustando o layout principal para as colunas */
+.content-wrapper { /* Seletor que deve envolver <main> e <div class="imagem"> no HTML */
+    display: flex;
+    max-width: 1000px; /* Nova largura máxima para as duas colunas */
+    margin: 60px auto;
+    padding: 0 5%;
+    gap: 40px;
+    flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço restante */
+}
+
+/* MODIFICADO: Ajustando o main para ser a primeira coluna (70% da largura) */
+main {
+    flex-grow: 1; 
+    max-width: none; /* Remove a max-width anterior para funcionar com flex */
+    margin: 0; /* Remove a margem 'auto' anterior, pois o pai está centralizando */
+    padding: 0; /* Remove o padding, pois será aplicado no wrapper */
+    flex-basis: 70%; /* Ocupa 70% do espaço disponível */
+}
+
+.about-content h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 30px;
+    /* Linha roxa decorativa abaixo do título */
+    border-bottom: 4px solid var(--purple-primary); 
+    padding-bottom: 10px;
+    display: inline-block;
+    color: var(--light-grey);
+}
+
+.about-content p {
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    color: #cccccc;
+    text-align: justify;
+    padding-left: 15px;
+    /* Destaque sutil com uma borda lateral roxa */
+    border-left: 3px solid var(--purple-secondary); 
+}
+
+/* Efeito de destaque para a segunda parte (paixão por jogos) */
+.about-content p:nth-child(3) {
+    font-weight: 400;
+    color: var(--light-grey);
+}
+
+/* NOVO: Estilização da coluna da imagem (30% da largura) */
+.imagem {
+    flex-basis: 30%; /* Ocupa 30% do espaço disponível */
+    display: flex; /* Alinha a imagem dentro da div */
+    justify-content: center;
+    align-items: flex-start; /* Alinha no topo da coluna */
+    padding-top: 50px; /* Para alinhar com o h1, se necessário, ou 0 */
+}
+
+.imagem img {
+    max-width: 100%; /* Garante que a imagem não ultrapasse a largura da coluna */
+    width: 300px;
+    height: auto;
+    /* Adicionando um estilo de destaque à imagem para seguir o padrão */
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.imagem img:hover {
+    transform: scale(1.05);
+}
+
+
+/* --- Rodapé (Estilo mantido) --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--mid-grey);
+    color: #aaaaaa;
+    font-size: 0.9em;
+    margin-top: auto; /* Garante que o rodapé fique no final da página */
+}
+
+
+/* --- Responsividade (MODIFICADA para quebrar as colunas em telas menores) --- */
+@media (max-width: 1050px) { /* Novo breakpoint para o layout de colunas */
+    .content-wrapper {
+        flex-direction: column; /* Colunas empilham-se em telas menores */
+        gap: 20px;
+        margin: 40px auto;
+    }
+
+    main {
+        flex-basis: auto; /* Remove a largura fixa */
+    }
+
+    .imagem {
+        flex-basis: auto;
+        padding-top: 0;
+        order: -1; /* Move a imagem para cima do texto em mobile */
+    }
+}
+
+@media (max-width: 900px) {
+    /* Não é necessário mudar o main aqui, pois o .content-wrapper já o trata */
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header {
+        padding: 15px 5%;
+    }
+    
+    .about-content h1 {
+        font-size: 2em;
+        display: block; 
+        text-align: center;
+    }
+    
+    .about-content p {
+        font-size: 1em;
+        padding-left: 10px;
+    }
+}

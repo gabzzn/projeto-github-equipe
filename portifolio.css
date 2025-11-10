@@ -1,0 +1,188 @@
+/* Importação da fonte Poppins (opcional, mas recomendado se quiser a fonte original) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* Variáveis para cores */
+:root {
+    --dark-grey: #1a1a1a; /* Fundo principal */
+    --mid-grey: #2c2c2c; /* Elementos secundários/cartões */
+    --light-grey: #f0f0f0; /* Texto claro */
+    --purple-primary: #7f00ff; /* Roxo vibrante - Cor de destaque */
+    --purple-secondary: #5e00c7; /* Roxo para hover/detalhes */
+}
+
+/* Reset Básico e Fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; 
+}
+
+body {
+    background-color: var(--dark-grey);
+    color: var(--light-grey);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    background-color: var(--mid-grey);
+    padding: 20px 5%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--light-grey);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Efeito de destaque ao passar o mouse (underline roxo) */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--purple-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--purple-primary);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* --- Wrapper de Conteúdo (Centraliza o conteúdo principal) --- */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 5%;
+}
+
+/* --- Seção Principal (Main) e Layout de Colunas --- */
+.about-content {
+    display: flex;
+    gap: 60px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Estilo para os títulos (h1) */
+.about-content h1 {
+    color: var(--purple-primary);
+    font-size: 2em;
+    margin-bottom: 20px;
+    border-bottom: 3px solid var(--purple-secondary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Estilo geral para as listas (ul) */
+.about-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Estilo para os itens da lista (li) - Feitos Notáveis e Projetos */
+.about-content ul li {
+    margin-bottom: 15px; /* Aumentei um pouco para melhor leitura */
+    padding-left: 1.5em; /* Aumentei o padding para dar mais espaço ao marcador */
+    position: relative;
+    font-size: 1.1em;
+}
+
+/* Marcador de lista customizado (Ponto roxo ou ícone) - CORREÇÃO APLICADA AQUI */
+.about-content ul li::before {
+    content: '★'; /* Marcador customizado */
+    color: var(--purple-primary);
+    font-weight: bold;
+    /* Alinha o marcador à esquerda do item da lista */
+    position: absolute;
+    left: 0;
+    top: 0; /* Garante alinhamento vertical com o topo do texto */
+}
+
+/* Configuração de Colunas */
+.about-content > ul { 
+    /* Esta é a lista de "Feitos Notáveis" que não está dentro de um div */
+    flex: 1; 
+    min-width: 300px; 
+    margin: 0; /* Reset de margem caso algum browser aplique */
+}
+
+.about-content > .coluna2 { 
+    /* Esta é a div que contém a lista "Meus Projetos" */
+    flex: 1; 
+    min-width: 300px; 
+}
+
+
+/* Estilo dos links de projeto */
+.coluna2 ul li a {
+    color: var(--light-grey);
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.coluna2 ul li a:hover {
+    color: var(--purple-primary);
+    text-decoration: underline;
+    padding-left: 5px;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+    .content-wrapper {
+        margin: 50px auto;
+    }
+
+    .about-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-content > ul,
+    .about-content > .coluna2 {
+        min-width: 100%;
+    }
+
+    .about-content h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header {
+        padding: 15px 5%;
+    }
+}
